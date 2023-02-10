@@ -1,0 +1,1 @@
+gooogletrans ishlamadi

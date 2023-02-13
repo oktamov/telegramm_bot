@@ -4,11 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aiogram = "*"
-markdown = "*"
-environs = "*"
-pillow = "*"
-requests = "*"
+opencv-python = "*"
 
 [dev-packages]
 

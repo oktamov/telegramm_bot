@@ -152,14 +152,5 @@ menu = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-menu_ortga = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text="/start")
-        ],
-    ],
-    resize_keyboard=True
-)
-
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

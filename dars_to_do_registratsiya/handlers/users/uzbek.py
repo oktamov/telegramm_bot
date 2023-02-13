@@ -89,12 +89,7 @@ async def get_gender(message: types.Message, state: FSMContext):
     csv_data.append(address)
     gender = data.get("gender")
     csv_data.append(gender)
-    with open("users.csv", 'a', newline="\n") as f:
-        header = ['fullname', "age", "phone", "address", "gender"]
-        dict_writer = csv.writer(f)
-        if os.path.getsize('users.csv') == 0:
-            dict_writer.writerow(header)
-        dict_writer.writerow(csv_data)
+    
 
     msg = f"Ism familiya: {name}\n"
     msg += f"Yoshi: {age}\n"
@@ -170,7 +165,13 @@ async def fanlar(call: CallbackQuery):
 async def ha_yoq_func(call: CallbackQuery):
     await call.message.answer("Siz bilan tez orada mutahasislarimiz boglanadi.")
     global csv_data
-    print(csv_data)
+    with open("users.csv", 'a', newline="\n") as f:
+        header = ['fullname', "age", "phone", "address", "gender"]
+        dict_writer = csv.writer(f)
+        if os.path.getsize('users.csv') == 0:
+            dict_writer.writerow(header)
+        dict_writer.writerow(csv_data)
+
 
 @dp.callback_query_handler(text='yoq')
 async def ha_yoq_func(call: CallbackQuery):

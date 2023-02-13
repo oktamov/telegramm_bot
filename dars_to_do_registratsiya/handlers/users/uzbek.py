@@ -77,6 +77,7 @@ async def get_gender(message: types.Message, state: FSMContext):
     )
 
     data = await state.get_data()
+    global csv_data
     csv_data = []
     name = data.get("name")
     csv_data.append(name)
@@ -88,10 +89,10 @@ async def get_gender(message: types.Message, state: FSMContext):
     csv_data.append(address)
     gender = data.get("gender")
     csv_data.append(gender)
-    with open("../../users.csv", 'a', newline="\n") as f:
+    with open("users.csv", 'a', newline="\n") as f:
         header = ['fullname', "age", "phone", "address", "gender"]
         dict_writer = csv.writer(f)
-        if os.path.getsize('../../users.csv') == 0:
+        if os.path.getsize('users.csv') == 0:
             dict_writer.writerow(header)
         dict_writer.writerow(csv_data)
 
@@ -108,6 +109,7 @@ async def get_gender(message: types.Message, state: FSMContext):
 @dp.message_handler(text="Kurslar💻")
 async def kurslar(message: types.Message):
     await message.answer("qay tarzda oqiysiz?", reply_markup=menu_kurs)
+
 
 @dp.callback_query_handler(text='offline')
 async def fanlar(call: CallbackQuery):
@@ -167,6 +169,8 @@ async def fanlar(call: CallbackQuery):
 @dp.callback_query_handler(text='ha')
 async def ha_yoq_func(call: CallbackQuery):
     await call.message.answer("Siz bilan tez orada mutahasislarimiz boglanadi.")
+    global csv_data
+    print(csv_data)
 
 @dp.callback_query_handler(text='yoq')
 async def ha_yoq_func(call: CallbackQuery):

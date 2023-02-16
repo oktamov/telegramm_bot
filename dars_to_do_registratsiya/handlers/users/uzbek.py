@@ -6,8 +6,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 from aiogram.types import CallbackQuery, ReplyKeyboardRemove
 
-from keyboards.default.person import menu_cont, menu_eng_gender, menu_uz_gender, menu_register
-from keyboards.inline.languages import lang, menu_kurs, menu_fanlar, ha_yoq
+from keyboards.default.person import menu_cont, menu_uz_gender, menu_register
+from keyboards.inline.languages import menu_kurs, menu_fanlar, ha_yoq
 from loader import dp
 from states.statesPerson import PersonalUzb
 from states.state_lang import Language
@@ -89,7 +89,7 @@ async def get_gender(message: types.Message, state: FSMContext):
     csv_data.append(address)
     gender = data.get("gender")
     csv_data.append(gender)
-    
+
 
     msg = f"Ism familiya: {name}\n"
     msg += f"Yoshi: {age}\n"

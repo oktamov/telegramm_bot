@@ -1,0 +1,1667 @@
+Index: shazam_bot/handlers/users/echo.py
+===================================================================
+diff --git a/shazam_bot/handlers/users/echo.py b/shazam_bot/handlers/users/echo.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/users/echo.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,9 +0,0 @@
+-from aiogram import types
+-
+-from loader import dp
+-
+-
+-# Echo bot
+-@dp.message_handler(state=None)
+-async def bot_echo(message: types.Message):
+-    await message.answer(message.text)
+Index: shazam_bot/handlers/errors/__init__.py
+===================================================================
+diff --git a/shazam_bot/handlers/errors/__init__.py b/shazam_bot/handlers/errors/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/errors/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,1 +0,0 @@
+-from . import error_handler
+Index: shazam_bot/.idea/misc.xml
+===================================================================
+diff --git a/shazam_bot/.idea/misc.xml b/shazam_bot/.idea/misc.xml
+deleted file mode 100644
+--- a/shazam_bot/.idea/misc.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,4 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Pipenv (shazam_bot)" project-jdk-type="Python SDK" />
+-</project>
+\ No newline at end of file
+Index: shazam_bot/utils/__init__.py
+===================================================================
+diff --git a/shazam_bot/utils/__init__.py b/shazam_bot/utils/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/utils/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,5 +0,0 @@
+-from . import db_api
+-from . import misc
+-from .photograph import photo_link
+-from .removeBackground import remove_background
+-from .notify_admins import on_startup_notify
+Index: shazam_bot/utils/misc/logging.py
+===================================================================
+diff --git a/shazam_bot/utils/misc/logging.py b/shazam_bot/utils/misc/logging.py
+deleted file mode 100644
+--- a/shazam_bot/utils/misc/logging.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,6 +0,0 @@
+-import logging
+-
+-logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
+-                    level=logging.INFO,
+-                    # level=logging.DEBUG,  # Можно заменить на другой уровень логгирования.
+-                    )
+Index: shazam_bot/handlers/errors/error_handler.py
+===================================================================
+diff --git a/shazam_bot/handlers/errors/error_handler.py b/shazam_bot/handlers/errors/error_handler.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/errors/error_handler.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,58 +0,0 @@
+-import logging
+-from aiogram.utils.exceptions import (Unauthorized, InvalidQueryID, TelegramAPIError,
+-                                      CantDemoteChatCreator, MessageNotModified, MessageToDeleteNotFound,
+-                                      MessageTextIsEmpty, RetryAfter,
+-                                      CantParseEntities, MessageCantBeDeleted)
+-
+-
+-from loader import dp
+-
+-
+-@dp.errors_handler()
+-async def errors_handler(update, exception):
+-    """
+-    Exceptions handler. Catches all exceptions within task factory tasks.
+-    :param dispatcher:
+-    :param update:
+-    :param exception:
+-    :return: stdout logging
+-    """
+-
+-    if isinstance(exception, CantDemoteChatCreator):
+-        logging.exception("Can't demote chat creator")
+-        return True
+-
+-    if isinstance(exception, MessageNotModified):
+-        logging.exception('Message is not modified')
+-        return True
+-    if isinstance(exception, MessageCantBeDeleted):
+-        logging.exception('Message cant be deleted')
+-        return True
+-
+-    if isinstance(exception, MessageToDeleteNotFound):
+-        logging.exception('Message to delete not found')
+-        return True
+-
+-    if isinstance(exception, MessageTextIsEmpty):
+-        logging.exception('MessageTextIsEmpty')
+-        return True
+-
+-    if isinstance(exception, Unauthorized):
+-        logging.exception(f'Unauthorized: {exception}')
+-        return True
+-
+-    if isinstance(exception, InvalidQueryID):
+-        logging.exception(f'InvalidQueryID: {exception} \nUpdate: {update}')
+-        return True
+-
+-    if isinstance(exception, TelegramAPIError):
+-        logging.exception(f'TelegramAPIError: {exception} \nUpdate: {update}')
+-        return True
+-    if isinstance(exception, RetryAfter):
+-        logging.exception(f'RetryAfter: {exception} \nUpdate: {update}')
+-        return True
+-    if isinstance(exception, CantParseEntities):
+-        logging.exception(f'CantParseEntities: {exception} \nUpdate: {update}')
+-        return True
+-    
+-    logging.exception(f'Update: {update} \n{exception}')
+Index: curs_exange/.idea/workspace.xml
+===================================================================
+diff --git a/curs_exange/.idea/workspace.xml b/curs_exange/.idea/workspace.xml
+deleted file mode 100644
+--- a/curs_exange/.idea/workspace.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,158 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="a5d62f56-32f5-43cc-837c-5fc9e6e405d1" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.env.dist" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/app.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/data/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/data/config.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/filters/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/channels/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/errors/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/errors/error_handler.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/groups/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/users/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/users/echo.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/users/help.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/handlers/users/start.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/keyboards/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/keyboards/default/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/keyboards/default/person.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/keyboards/inline/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/loader.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/middlewares/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/middlewares/throttling.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/requirements.txt" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/states/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/db_api/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/misc/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/misc/logging.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/misc/throttling.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/notify_admins.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/utils/set_bot_commands.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/shazam_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../shazam_bot/main.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/.gitignore" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/dars_to_do.iml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/misc.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/modules.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/.idea/vcs.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do/Pipfile" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do/Pipfile.lock" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do/handlers/users/register.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do/states/statesPerson.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/task.py" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do/users.csv" afterDir="false" />
+-    </list>
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="FileTemplateManagerImpl">
+-    <option name="RECENT_TEMPLATES">
+-      <list>
+-        <option value="Python Script" />
+-      </list>
+-    </option>
+-  </component>
+-  <component name="MarkdownSettingsMigration">
+-    <option name="stateVersion" value="1" />
+-  </component>
+-  <component name="ProjectId" id="2LVBrPtX6d1AZXuCVwR2bVz8pdo" />
+-  <component name="ProjectLevelVcsManager">
+-    <ConfirmationsSetting value="2" id="Add" />
+-  </component>
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+-  }
+-}</component>
+-  <component name="RecentsManager">
+-    <key name="MoveFile.RECENT_KEYS">
+-      <recent name="D:\Roziali\python\telegramm_bot\curs_exange" />
+-    </key>
+-  </component>
+-  <component name="RunManager">
+-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+-      <module name="curs_exange" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
+-      <option name="EMULATE_TERMINAL" value="false" />
+-      <option name="MODULE_MODE" value="false" />
+-      <option name="REDIRECT_INPUT" value="false" />
+-      <option name="INPUT_FILE" value="" />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="a5d62f56-32f5-43cc-837c-5fc9e6e405d1" name="Changes" comment="" />
+-      <created>1675946567971</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1675946567971</updated>
+-      <workItem from="1675946573344" duration="1287000" />
+-      <workItem from="1675959845346" duration="11083000" />
+-      <workItem from="1675995694844" duration="5774000" />
+-      <workItem from="1676014138662" duration="4177000" />
+-      <workItem from="1676025221178" duration="69000" />
+-      <workItem from="1676025302764" duration="2883000" />
+-      <workItem from="1676098380697" duration="602000" />
+-    </task>
+-    <servers />
+-  </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+-  <component name="VcsManagerConfiguration">
+-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+-  </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/curs_exange$main.coverage" NAME="main Coverage Results" MODIFIED="1676023884915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: shazam_bot/.idea/vcs.xml
+===================================================================
+diff --git a/shazam_bot/.idea/vcs.xml b/shazam_bot/.idea/vcs.xml
+deleted file mode 100644
+--- a/shazam_bot/.idea/vcs.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: shazam_bot/example.py
+===================================================================
+diff --git a/shazam_bot/example.py b/shazam_bot/example.py
+deleted file mode 100644
+--- a/shazam_bot/example.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,14 +0,0 @@
+-import requests
+-
+-url = "https://text-removal-ai.p.rapidapi.com/tensor"
+-
+-payload = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"file\"\r\n\r\n\r\n-----011000010111000001101001--\r\n\r\n"
+-headers = {
+-	"content-type": "multipart/form-data; boundary=---011000010111000001101001",
+-	"X-RapidAPI-Key": "6f01dc13e8msh46da8b6a8249169p1b5857jsn3dfb408ca3e5",
+-	"X-RapidAPI-Host": "text-removal-ai.p.rapidapi.com"
+-}
+-
+-response = requests.request("POST", url, data=payload, headers=headers)
+-
+-print(response.text)
+Index: shazam_bot/handlers/users/__init__.py
+===================================================================
+diff --git a/shazam_bot/handlers/users/__init__.py b/shazam_bot/handlers/users/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/users/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,4 +0,0 @@
+-from . import help
+-from . import start
+-from . import telegraph
+-from . import echo
+\ No newline at end of file
+Index: shazam_bot/app.py
+===================================================================
+diff --git a/shazam_bot/app.py b/shazam_bot/app.py
+deleted file mode 100644
+--- a/shazam_bot/app.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,18 +0,0 @@
+-from aiogram import executor
+-
+-from loader import dp
+-import middlewares, filters, handlers
+-from utils.notify_admins import on_startup_notify
+-from utils.set_bot_commands import set_default_commands
+-
+-
+-async def on_startup(dispatcher):
+-    # Birlamchi komandalar (/star va /help)
+-    await set_default_commands(dispatcher)
+-
+-    # Bot ishga tushgani haqida adminga xabar berish
+-    await on_startup_notify(dispatcher)
+-
+-
+-if __name__ == '__main__':
+-    executor.start_polling(dp, on_startup=on_startup)
+Index: shazam_bot/handlers/users/start.py
+===================================================================
+diff --git a/shazam_bot/handlers/users/start.py b/shazam_bot/handlers/users/start.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/users/start.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,9 +0,0 @@
+-from aiogram import types
+-from aiogram.dispatcher.filters.builtin import CommandStart
+-
+-from loader import dp
+-
+-
+-@dp.message_handler(CommandStart())
+-async def bot_start(message: types.Message):
+-    await message.answer(f"Salom, {message.from_user.full_name}!")
+Index: krill_lotin/.idea/workspace.xml
+===================================================================
+diff --git a/krill_lotin/.idea/workspace.xml b/krill_lotin/.idea/workspace.xml
+deleted file mode 100644
+--- a/krill_lotin/.idea/workspace.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,135 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="c96aa7d2-362d-495a-84c5-d47292ade913" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/telegramm_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/age_calc.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/curs_exange.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/country_currency.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/states.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/krill_lotin.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/transliterate.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/translate.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translatebot/.idea/translatebot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translatebot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/.idea/weather_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/student.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/studentt.csv" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/utils.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/weather.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../weather_bot/README.md" afterDir="false" />
+-    </list>
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="ProjectId" id="2LWrHDFfIP2Z7S3UFbDeS2pmOzG" />
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "D:/Roziali/python/telegramm_bot/krill_lotin",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "vue.rearranger.settings.migration": "true"
+-  }
+-}]]></component>
+-  <component name="RecentsManager">
+-    <key name="CopyFile.RECENT_KEYS">
+-      <recent name="D:\Roziali\python\telegramm_bot\krill_lotin" />
+-    </key>
+-  </component>
+-  <component name="RunManager">
+-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+-      <module name="krill_lotin" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
+-      <option name="EMULATE_TERMINAL" value="false" />
+-      <option name="MODULE_MODE" value="false" />
+-      <option name="REDIRECT_INPUT" value="false" />
+-      <option name="INPUT_FILE" value="" />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="c96aa7d2-362d-495a-84c5-d47292ade913" name="Changes" comment="" />
+-      <created>1675997589270</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1675997589270</updated>
+-      <workItem from="1675997595475" duration="925000" />
+-    </task>
+-    <servers />
+-  </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/krill_lotin$main.coverage" NAME="main Coverage Results" MODIFIED="1675997754849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: shazam_bot/keyboards/__init__.py
+===================================================================
+diff --git a/shazam_bot/keyboards/__init__.py b/shazam_bot/keyboards/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/keyboards/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,2 +0,0 @@
+-from . import default
+-from . import inline
+Index: shazam_bot/utils/misc/throttling.py
+===================================================================
+diff --git a/shazam_bot/utils/misc/throttling.py b/shazam_bot/utils/misc/throttling.py
+deleted file mode 100644
+--- a/shazam_bot/utils/misc/throttling.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,16 +0,0 @@
+-def rate_limit(limit: int, key=None):
+-    """
+-    Decorator for configuring rate limit and key in different functions.
+-
+-    :param limit:
+-    :param key:
+-    :return:
+-    """
+-
+-    def decorator(func):
+-        setattr(func, 'throttling_rate_limit', limit)
+-        if key:
+-            setattr(func, 'throttling_key', key)
+-        return func
+-
+-    return decorator
+Index: shazam_bot/keyboards/inline/__init__.py
+===================================================================
+diff --git a/shazam_bot/keyboards/inline/__init__.py b/shazam_bot/keyboards/inline/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/keyboards/inline/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,1 +0,0 @@
+-
+Index: shazam_bot/middlewares/__init__.py
+===================================================================
+diff --git a/shazam_bot/middlewares/__init__.py b/shazam_bot/middlewares/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/middlewares/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,8 +0,0 @@
+-from aiogram import Dispatcher
+-
+-from loader import dp
+-from .throttling import ThrottlingMiddleware
+-
+-
+-if __name__ == "middlewares":
+-    dp.middleware.setup(ThrottlingMiddleware())
+Index: youtube_insta_tiktok_down/.idea/workspace.xml
+===================================================================
+diff --git a/youtube_insta_tiktok_down/.idea/workspace.xml b/youtube_insta_tiktok_down/.idea/workspace.xml
+deleted file mode 100644
+--- a/youtube_insta_tiktok_down/.idea/workspace.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,104 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="94bcb5fb-50ea-4321-bb48-7219892c2be5" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/../botbot/.idea/botbot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../botbot/example.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../botbot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/chats.csv" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/handlers/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/handlers/delete_boards.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/keyboard/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/keyboard/inline.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/utils/__init__.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/utils/create_board.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../trello_bot/utils/del_board.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/example.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do_registratsiya/handlers/users/uzbek.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do_registratsiya/handlers/users/uzbek.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do_registratsiya/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do_registratsiya/users.csv" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../dars_to_do_registratsiya/utils/set_bot_commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/../dars_to_do_registratsiya/utils/set_bot_commands.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../trello_bot/.idea/.gitignore" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../trello_bot/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/../trello_bot/Pipfile" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../trello_bot/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../trello_bot/Pipfile.lock" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../trello_bot/main.py" beforeDir="false" />
+-    </list>
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="FileTemplateManagerImpl">
+-    <option name="RECENT_TEMPLATES">
+-      <list>
+-        <option value="Python Script" />
+-      </list>
+-    </option>
+-  </component>
+-  <component name="MarkdownSettingsMigration">
+-    <option name="stateVersion" value="1" />
+-  </component>
+-  <component name="ProjectId" id="2LoKoFvkm1wVItf36rlI4T4ETEK" />
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "vue.rearranger.settings.migration": "true"
+-  }
+-}]]></component>
+-  <component name="RunManager">
+-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+-      <module name="youtube_insta_tiktok_down" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
+-      <option name="EMULATE_TERMINAL" value="false" />
+-      <option name="MODULE_MODE" value="false" />
+-      <option name="REDIRECT_INPUT" value="false" />
+-      <option name="INPUT_FILE" value="" />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="94bcb5fb-50ea-4321-bb48-7219892c2be5" name="Changes" comment="" />
+-      <created>1676532167798</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1676532167798</updated>
+-      <workItem from="1676532174930" duration="9909000" />
+-    </task>
+-    <servers />
+-  </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/youtube_insta_tiktok_down$example.coverage" NAME="example Coverage Results" MODIFIED="1676541017228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-    <SUITE FILE_PATH="coverage/youtube_insta_tiktok_down$main.coverage" NAME="main Coverage Results" MODIFIED="1676539313101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: trello.py
+===================================================================
+diff --git a/trello.py b/trello.py
+deleted file mode 100644
+--- a/trello.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,105 +0,0 @@
+-import requests
+-import json
+-
+-from environs import Env
+-
+-env = Env()
+-env.read_env()
+-
+-
+-class TrelloManager:
+-    KEY = env("TRELLO_KEY")
+-    TOKEN = env("TRELLO_TOKEN")
+-
+-    def __init__(self, username):
+-        self.username = username
+-
+-    @staticmethod
+-    def base_headers():
+-        return {
+-            "Accept": "application/json"
+-        }
+-
+-    @staticmethod
+-    def get_list_id_with_name(list_data, name):
+-        try:
+-            return [data.get("id") for data in list_data if data.get("name") == name][0]
+-        except IndexError as e:
+-            print(e)
+-
+-    def credentials(self):
+-        return {
+-            'key': self.KEY,
+-            'token': self.TOKEN
+-        }
+-
+-    def get_member_id(self):
+-        url = f"https://api.trello.com/1/members/{self.username}"
+-
+-        response = requests.request(
+-            "GET",
+-            url,
+-            headers=self.base_headers(),
+-            params=self.credentials()
+-        )
+-
+-        if response.status_code == 200:
+-            return json.loads(response.text).get("id")
+-
+-    def get_boards(self):
+-        url = f"https://api.trello.com/1/members/{self.username}/boards"
+-
+-        response = requests.request(
+-            "GET",
+-            url,
+-            headers=self.base_headers(),
+-            params=self.credentials()
+-        )
+-
+-        if response.status_code == 200:
+-            return json.loads(response.text)
+-
+-    def get_lists_on_a_board(self, board_id):
+-        url = f"https://api.trello.com/1/boards/{board_id}/lists"
+-
+-        response = requests.request(
+-            "GET",
+-            url,
+-            headers=self.base_headers(),
+-            params=self.credentials()
+-        )
+-
+-        if response.status_code == 200:
+-            return json.loads(response.text)
+-
+-    def get_cards_on_a_list(self, list_id):
+-        url = f"https://api.trello.com/1/lists/{list_id}/cards"
+-
+-        response = requests.request(
+-            "GET",
+-            url,
+-            headers=self.base_headers(),
+-            params=self.credentials()
+-        )
+-
+-        if response.status_code == 200:
+-            return json.loads(response.text)
+-
+-    def get_board_id_with_name(self, name):
+-        try:
+-            return [board.get("id") for board in self.get_boards() if board.get("name") == name][0]
+-        except IndexError as e:
+-            print(e)
+-
+-    def get_board_members(self, board_id):
+-        url = f"https://api.trello.com/1/boards/{board_id}/memberships"
+-
+-        response = requests.request(
+-            "GET",
+-            url,
+-            headers=self.base_headers(),
+-            params=self.credentials()
+-        )
+-
+-        if response.status_code == 200:
+-            return json.loads(response.text)
+Index: shazam_bot/data/config.py
+===================================================================
+diff --git a/shazam_bot/data/config.py b/shazam_bot/data/config.py
+deleted file mode 100644
+--- a/shazam_bot/data/config.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,10 +0,0 @@
+-from environs import Env
+-
+-# environs kutubxonasidan foydalanish
+-env = Env()
+-env.read_env()
+-
+-# .env fayl ichidan quyidagilarni o'qiymiz
+-BOT_TOKEN = env.str("BOT_TOKEN")  # Bot toekn
+-ADMINS = env.list("ADMINS")  # adminlar ro'yxati
+-IP = env.str("ip")  # Xosting ip manzili
+Index: shazam_bot/requirements.txt
+===================================================================
+diff --git a/shazam_bot/requirements.txt b/shazam_bot/requirements.txt
+deleted file mode 100644
+--- a/shazam_bot/requirements.txt	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,2 +0,0 @@
+-aiogram~=2.14
+-environs~=8.0.0
+\ No newline at end of file
+Index: shazam_bot/.idea/inspectionProfiles/Project_Default.xml
+===================================================================
+diff --git a/shazam_bot/.idea/inspectionProfiles/Project_Default.xml b/shazam_bot/.idea/inspectionProfiles/Project_Default.xml
+deleted file mode 100644
+--- a/shazam_bot/.idea/inspectionProfiles/Project_Default.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,22 +0,0 @@
+-<component name="InspectionProjectProfileManager">
+-  <profile version="1.0">
+-    <option name="myName" value="Project Default" />
+-    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+-      <option name="ignoredPackages">
+-        <value>
+-          <list size="1">
+-            <item index="0" class="java.lang.String" itemvalue="stability-sdk" />
+-          </list>
+-        </value>
+-      </option>
+-    </inspection_tool>
+-    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+-      <option name="ignoredIdentifiers">
+-        <list>
+-          <option value="telebot.logger.setLevel" />
+-          <option value="aiogram.utils.i18n.set_locale" />
+-        </list>
+-      </option>
+-    </inspection_tool>
+-  </profile>
+-</component>
+\ No newline at end of file
+Index: shazam_bot/filters/__init__.py
+===================================================================
+diff --git a/shazam_bot/filters/__init__.py b/shazam_bot/filters/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/filters/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,9 +0,0 @@
+-from aiogram import Dispatcher
+-
+-from loader import dp
+-# from .is_admin import AdminFilter
+-
+-
+-if __name__ == "filters":
+-    #dp.filters_factory.bind(is_admin)
+-    pass
+Index: shazam_bot/utils/photograph.py
+===================================================================
+diff --git a/shazam_bot/utils/photograph.py b/shazam_bot/utils/photograph.py
+deleted file mode 100644
+--- a/shazam_bot/utils/photograph.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,18 +0,0 @@
+-from io import BytesIO
+-import aiohttp
+-from aiogram import types
+-from loader import bot
+-
+-
+-async def photo_link(photo: types.photo_size.PhotoSize) -> str:
+-    with await photo.download(BytesIO()) as file:
+-        form = aiohttp.FormData()
+-        form.add_field(
+-            name='file',
+-            value=file,
+-        )
+-        async with bot.session.post('https://telegra.ph/upload', data=form) as response:
+-            img_src = await response.json()
+-
+-    link = 'http://telegra.ph/' + img_src[0]["src"]
+-    return link
+\ No newline at end of file
+Index: shazam_bot/.idea/inspectionProfiles/profiles_settings.xml
+===================================================================
+diff --git a/shazam_bot/.idea/inspectionProfiles/profiles_settings.xml b/shazam_bot/.idea/inspectionProfiles/profiles_settings.xml
+deleted file mode 100644
+--- a/shazam_bot/.idea/inspectionProfiles/profiles_settings.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,6 +0,0 @@
+-<component name="InspectionProjectProfileManager">
+-  <settings>
+-    <option name="USE_PROJECT_PROFILE" value="false" />
+-    <version value="1.0" />
+-  </settings>
+-</component>
+\ No newline at end of file
+Index: shazam_bot/utils/notify_admins.py
+===================================================================
+diff --git a/shazam_bot/utils/notify_admins.py b/shazam_bot/utils/notify_admins.py
+deleted file mode 100644
+--- a/shazam_bot/utils/notify_admins.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,14 +0,0 @@
+-import logging
+-
+-from aiogram import Dispatcher
+-
+-from data.config import ADMINS
+-
+-
+-async def on_startup_notify(dp: Dispatcher):
+-    for admin in ADMINS:
+-        try:
+-            await dp.bot.send_message(admin, "Bot ishga tushdi")
+-
+-        except Exception as err:
+-            logging.exception(err)
+Index: shazam_bot/.gitignore
+===================================================================
+diff --git a/shazam_bot/.gitignore b/shazam_bot/.gitignore
+deleted file mode 100644
+--- a/shazam_bot/.gitignore	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,131 +0,0 @@
+-# Byte-compiled / optimized / DLL files
+-__pycache__/
+-*.py[cod]
+-*$py.class
+-
+-# C extensions
+-*.so
+-
+-# Distribution / packaging
+-.Python
+-build/
+-develop-eggs/
+-dist/
+-downloads/
+-eggs/
+-.eggs/
+-lib/
+-lib64/
+-parts/
+-sdist/
+-var/
+-wheels/
+-pip-wheel-metadata/
+-share/python-wheels/
+-*.egg-info/
+-.installed.cfg
+-*.egg
+-MANIFEST
+-
+-# PyInstaller
+-#  Usually these files are written by a python script from a template
+-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+-*.manifest
+-*.spec
+-
+-# Installer logs
+-pip-log.txt
+-pip-delete-this-directory.txt
+-
+-# Unit test / coverage reports
+-htmlcov/
+-.tox/
+-.nox/
+-.coverage
+-.coverage.*
+-.cache
+-nosetests.xml
+-coverage.xml
+-*.cover
+-*.py,cover
+-.hypothesis/
+-.pytest_cache/
+-
+-# Translations
+-*.mo
+-*.pot
+-
+-# Django stuff:
+-*.log
+-local_settings.py
+-db.sqlite3
+-db.sqlite3-journal
+-
+-# Flask stuff:
+-instance/
+-.webassets-cache
+-
+-# Scrapy stuff:
+-.scrapy
+-
+-# Sphinx documentation
+-docs/_build/
+-
+-# PyBuilder
+-target/
+-
+-# Jupyter Notebook
+-.ipynb_checkpoints
+-
+-# IPython
+-profile_default/
+-ipython_config.py
+-
+-# pyenv
+-.python-version
+-
+-# pipenv
+-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+-#   install all needed dependencies.
+-#Pipfile.lock
+-
+-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+-__pypackages__/
+-
+-# Celery stuff
+-celerybeat-schedule
+-celerybeat.pid
+-
+-# SageMath parsed files
+-*.sage.py
+-
+-# Environments
+-.venv
+-*/.env
+-env/
+-venv/
+-ENV/
+-env.bak/
+-venv.bak/
+-
+-# Spyder project settings
+-.spyderproject
+-.spyproject
+-
+-# Rope project settings
+-.ropeproject
+-
+-# mkdocs documentation
+-/site
+-
+-# mypy
+-.mypy_cache/
+-.dmypy.json
+-dmypy.json
+-
+-# Pyre type checker
+-.pyre/
+-.idea/*
+-.env
+\ No newline at end of file
+Index: shazam_bot/handlers/__init__.py
+===================================================================
+diff --git a/shazam_bot/handlers/__init__.py b/shazam_bot/handlers/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,4 +0,0 @@
+-from . import errors
+-from . import users
+-from . import groups
+-from . import channels
+Index: shazam_bot/middlewares/throttling.py
+===================================================================
+diff --git a/shazam_bot/middlewares/throttling.py b/shazam_bot/middlewares/throttling.py
+deleted file mode 100644
+--- a/shazam_bot/middlewares/throttling.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,37 +0,0 @@
+-import asyncio
+-
+-from aiogram import types, Dispatcher
+-from aiogram.dispatcher import DEFAULT_RATE_LIMIT
+-from aiogram.dispatcher.handler import CancelHandler, current_handler
+-from aiogram.dispatcher.middlewares import BaseMiddleware
+-from aiogram.utils.exceptions import Throttled
+-
+-
+-class ThrottlingMiddleware(BaseMiddleware):
+-    """
+-    Simple middleware
+-    """
+-
+-    def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='antiflood_'):
+-        self.rate_limit = limit
+-        self.prefix = key_prefix
+-        super(ThrottlingMiddleware, self).__init__()
+-
+-    async def on_process_message(self, message: types.Message, data: dict):
+-        handler = current_handler.get()
+-        dispatcher = Dispatcher.get_current()
+-        if handler:
+-            limit = getattr(handler, "throttling_rate_limit", self.rate_limit)
+-            key = getattr(handler, "throttling_key", f"{self.prefix}_{handler.__name__}")
+-        else:
+-            limit = self.rate_limit
+-            key = f"{self.prefix}_message"
+-        try:
+-            await dispatcher.throttle(key, rate=limit)
+-        except Throttled as t:
+-            await self.message_throttled(message, t)
+-            raise CancelHandler()
+-
+-    async def message_throttled(self, message: types.Message, throttled: Throttled):
+-        if throttled.exceeded_count <= 2:
+-            await message.reply("Too many requests!")
+Index: translate/.idea/workspace.xml
+===================================================================
+diff --git a/translate/.idea/workspace.xml b/translate/.idea/workspace.xml
+deleted file mode 100644
+--- a/translate/.idea/workspace.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,148 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="7f86476f-a07f-4088-b55b-d2ed2bdf1c85" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/telegramm_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/age_calc.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../age_calc/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/curs_exange.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/country_currency.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/states.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/dars_to_do.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/states.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/task.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/users.csv" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/krill_lotin.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/transliterate.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/translate.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translatebot/.idea/translatebot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translatebot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/.idea/weather_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/student.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/studentt.csv" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/utils.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/weather.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../weather_bot/README.md" afterDir="false" />
+-    </list>
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="MarkdownSettingsMigration">
+-    <option name="stateVersion" value="1" />
+-  </component>
+-  <component name="ProjectId" id="2LV2PXXguZz1rZ2CY3dIWGTRAHN" />
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+-  }
+-}</component>
+-  <component name="RunManager">
+-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+-      <module name="translate" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
+-      <option name="EMULATE_TERMINAL" value="false" />
+-      <option name="MODULE_MODE" value="false" />
+-      <option name="REDIRECT_INPUT" value="false" />
+-      <option name="INPUT_FILE" value="" />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="7f86476f-a07f-4088-b55b-d2ed2bdf1c85" name="Changes" comment="" />
+-      <created>1675941905550</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1675941905550</updated>
+-      <workItem from="1675941908878" duration="5251000" />
+-      <workItem from="1675959824508" duration="30000" />
+-      <workItem from="1676024324884" duration="681000" />
+-    </task>
+-    <servers />
+-  </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/translate$main.coverage" NAME="main Coverage Results" MODIFIED="1675946308104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: shazam_bot/.idea/shazam_bot.iml
+===================================================================
+diff --git a/shazam_bot/.idea/shazam_bot.iml b/shazam_bot/.idea/shazam_bot.iml
+deleted file mode 100644
+--- a/shazam_bot/.idea/shazam_bot.iml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,12 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="PYTHON_MODULE" version="4">
+-  <component name="NewModuleRootManager">
+-    <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-  <component name="PyDocumentationSettings">
+-    <option name="format" value="PLAIN" />
+-    <option name="myDocStringFormat" value="Plain" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: shazam_bot/utils/set_bot_commands.py
+===================================================================
+diff --git a/shazam_bot/utils/set_bot_commands.py b/shazam_bot/utils/set_bot_commands.py
+deleted file mode 100644
+--- a/shazam_bot/utils/set_bot_commands.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,10 +0,0 @@
+-from aiogram import types
+-
+-
+-async def set_default_commands(dp):
+-    await dp.bot.set_my_commands(
+-        [
+-            types.BotCommand("start", "Botni ishga tushurish"),
+-            types.BotCommand("help", "Yordam"),
+-        ]
+-    )
+Index: shazam_bot/Pipfile
+===================================================================
+diff --git a/shazam_bot/Pipfile b/shazam_bot/Pipfile
+deleted file mode 100644
+--- a/shazam_bot/Pipfile	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,13 +0,0 @@
+-[[source]]
+-url = "https://pypi.org/simple"
+-verify_ssl = true
+-name = "pypi"
+-
+-[packages]
+-aiogram = "~=2.14"
+-environs = "~=8.0.0"
+-
+-[dev-packages]
+-
+-[requires]
+-python_version = "3.9"
+Index: shazam_bot/utils/removeBackground.py
+===================================================================
+diff --git a/shazam_bot/utils/removeBackground.py b/shazam_bot/utils/removeBackground.py
+deleted file mode 100644
+--- a/shazam_bot/utils/removeBackground.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,18 +0,0 @@
+-import requests
+-import logging
+-
+-url = "https://background-removal.p.rapidapi.com/remove"
+-
+-headers = {
+-    'content-type': "application/x-www-form-urlencoded",
+-    'x-rapidapi-host': "background-removal.p.rapidapi.com",
+-    'x-rapidapi-key': "6f01dc13e8msh46da8b6a8249169p1b5857jsn3dfb408ca3e5"
+-    }
+-# test payload
+-# payload = "image_url=https%3A%2F%2Fobjectcut.com%2Fassets%2Fimg%2Fraven.jpg"
+-
+-async def remove_background(img_url):
+-    payload = f"image_url={img_url}"
+-    response = requests.request("POST", url, data=payload, headers=headers)
+-    # logging.info(response.json()['response']['image_url'])
+-    return response.json()['response']['image_url']
+\ No newline at end of file
+Index: shazam_bot/.idea/modules.xml
+===================================================================
+diff --git a/shazam_bot/.idea/modules.xml b/shazam_bot/.idea/modules.xml
+deleted file mode 100644
+--- a/shazam_bot/.idea/modules.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/shazam_bot.iml" filepath="$PROJECT_DIR$/.idea/shazam_bot.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: shazam_bot/handlers/users/help.py
+===================================================================
+diff --git a/shazam_bot/handlers/users/help.py b/shazam_bot/handlers/users/help.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/users/help.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,13 +0,0 @@
+-from aiogram import types
+-from aiogram.dispatcher.filters.builtin import CommandHelp
+-
+-from loader import dp
+-
+-
+-@dp.message_handler(CommandHelp())
+-async def bot_help(message: types.Message):
+-    text = ("Buyruqlar: ",
+-            "/start - Botni ishga tushirish",
+-            "/help - Yordam")
+-    
+-    await message.answer("\n".join(text))
+\ No newline at end of file
+Index: shazam_bot/loader.py
+===================================================================
+diff --git a/shazam_bot/loader.py b/shazam_bot/loader.py
+deleted file mode 100644
+--- a/shazam_bot/loader.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,8 +0,0 @@
+-from aiogram import Bot, Dispatcher, types
+-from aiogram.contrib.fsm_storage.memory import MemoryStorage
+-
+-from data import config
+-
+-bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
+-storage = MemoryStorage()
+-dp = Dispatcher(bot, storage=storage)
+Index: age_calc/.idea/workspace.xml
+===================================================================
+diff --git a/age_calc/.idea/workspace.xml b/age_calc/.idea/workspace.xml
+deleted file mode 100644
+--- a/age_calc/.idea/workspace.xml	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,144 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="407ffeb5-4bf6-4d82-ac46-b6339f322424" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/telegramm_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/age_calc.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/curs_exange.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/country_currency.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../curs_exange/states.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/dars_to_do.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/Pipfile.lock" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/states.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../dars_to_do/task.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/krill_lotin.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/Pipfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../krill_lotin/transliterate.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/translate.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translate/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translatebot/.idea/translatebot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../translatebot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/.idea/weather_bot.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/student.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/studentt.csv" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/utils.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../weather_bot/weather.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../weather_bot/README.md" afterDir="false" />
+-    </list>
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="MarkdownSettingsMigration">
+-    <option name="stateVersion" value="1" />
+-  </component>
+-  <component name="ProjectId" id="2LWrrs0rBr88lpsRVYx4KuWx2Cy" />
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "vue.rearranger.settings.migration": "true"
+-  }
+-}]]></component>
+-  <component name="RunManager">
+-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+-      <module name="age_calc" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
+-      <option name="EMULATE_TERMINAL" value="false" />
+-      <option name="MODULE_MODE" value="false" />
+-      <option name="REDIRECT_INPUT" value="false" />
+-      <option name="INPUT_FILE" value="" />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="Default task">
+-      <changelist id="407ffeb5-4bf6-4d82-ac46-b6339f322424" name="Changes" comment="" />
+-      <created>1675997881480</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1675997881480</updated>
+-      <workItem from="1675997884842" duration="1749000" />
+-    </task>
+-    <servers />
+-  </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+-    <SUITE FILE_PATH="coverage/age_calc$main.coverage" NAME="main Coverage Results" MODIFIED="1675998316222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: utils.py
+===================================================================
+diff --git a/utils.py b/utils.py
+deleted file mode 100644
+--- a/utils.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,44 +0,0 @@
+-import csv
+-import os
+-
+-
+-def write_chat_to_csv(file_path, message):
+-    header = ["chat_id", "first_name", "last_name", "trello_username"]
+-    row = {
+-        "chat_id": message.chat.id,
+-        "first_name": message.from_user.first_name,
+-        "last_name": message.from_user.last_name,
+-        "trello_username": message.text
+-    }
+-    with open(file_path, "a+", newline="\n") as f:
+-        csv_writer = csv.DictWriter(f, header)
+-        if os.path.getsize(file_path) == 0:
+-            csv_writer.writeheader()
+-        csv_writer.writerow(row)
+-    print("Chat add successfully.")
+-
+-
+-def check_chat_id_from_csv(file_path, chat_id):
+-    with open(file_path, encoding="utf-8") as f:
+-        csv_reader = csv.DictReader(f)
+-        return chat_id in [int(row.get("chat_id")) for row in csv_reader]
+-
+-
+-def get_trello_username_by_chat_id(file_path, chat_id):
+-    with open(file_path, encoding="utf-8") as f:
+-        csv_reader = csv.DictReader(f)
+-        users = [
+-            row.get("trello_username")
+-            for row in csv_reader
+-            if int(row.get("chat_id")) == chat_id
+-        ]
+-        return users[0] if users else None
+-
+-
+-def get_member_tasks_message(card_data, member_id):
+-    msg = ""
+-    for data in card_data:
+-        if member_id in data.get("idMembers"):
+-            msg += f"{data.get('idShort')} - <a href=\"{data.get('url')}\">{data.get('name')}</a>\n"
+-
+-    return msg
+Index: shazam_bot/utils/misc/__init__.py
+===================================================================
+diff --git a/shazam_bot/utils/misc/__init__.py b/shazam_bot/utils/misc/__init__.py
+deleted file mode 100644
+--- a/shazam_bot/utils/misc/__init__.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,2 +0,0 @@
+-from .throttling import rate_limit
+-from . import logging
+Index: shazam_bot/handlers/users/telegraph.py
+===================================================================
+diff --git a/shazam_bot/handlers/users/telegraph.py b/shazam_bot/handlers/users/telegraph.py
+deleted file mode 100644
+--- a/shazam_bot/handlers/users/telegraph.py	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
++++ /dev/null	(revision c0d1ba3bb14ed425ada4c1f160bfe49f62b752eb)
+@@ -1,14 +0,0 @@
+-from aiogram import types
+-
+-from loader import dp
+-from utils import photo_link
+-from utils import remove_background
+-
+-@dp.message_handler(content_types='photo')
+-async def photo_handler(msg: types.Message):
+-    photo = msg.photo[-1]
+-    link = await photo_link(photo)
+-    await msg.answer(link)
+-    new_photo = await remove_background(link)
+-    await msg.reply_document(document=new_photo, caption="Bu fayl")
+-    await msg.reply_photo(new_photo, caption="Bu rasm")
+\ No newline at end of file
+diff --git a/shazam_bot/keyboards/default/__init__.py b/shazam_bot/keyboards/default/__init__.py
+deleted file mode 100644
+diff --git a/shazam_bot/data/__init__.py b/shazam_bot/data/__init__.py
+deleted file mode 100644
+diff --git a/shazam_bot/states/__init__.py b/shazam_bot/states/__init__.py
+deleted file mode 100644
+diff --git a/shazam_bot/handlers/channels/__init__.py b/shazam_bot/handlers/channels/__init__.py
+deleted file mode 100644
+diff --git a/shazam_bot/utils/db_api/__init__.py b/shazam_bot/utils/db_api/__init__.py
+deleted file mode 100644
+diff --git a/shazam_bot/handlers/groups/__init__.py b/shazam_bot/handlers/groups/__init__.py
+deleted file mode 100644

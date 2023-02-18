@@ -1,4 +1,4 @@
-    import requests
+import requests
 import json
 
 from environs import Env
@@ -42,7 +42,6 @@ class TrelloManager:
             headers=self.base_headers(),
             params=self.credentials()
         )
-
         if response.status_code == 200:
             return json.loads(response.text).get("id")
 
@@ -55,7 +54,6 @@ class TrelloManager:
             headers=self.base_headers(),
             params=self.credentials()
         )
-
         if response.status_code == 200:
             return json.loads(response.text)
 
@@ -68,7 +66,7 @@ class TrelloManager:
             headers=self.base_headers(),
             params=self.credentials()
         )
-
+        # print(json.loads(response.text)
         if response.status_code == 200:
             return json.loads(response.text)
 
@@ -92,7 +90,7 @@ class TrelloManager:
             print(e)
 
     def get_board_members(self, board_id):
-        url = f"https://api.trello.com/1/boards/{board_id}/memberships"
+        url = f"https://api.trello.com/1/boards/{board_id}/members"
 
         response = requests.request(
             "GET",
@@ -101,5 +99,52 @@ class TrelloManager:
             params=self.credentials()
         )
 
+        if response.status_code == 200:
+            return json.loads(response.text)
+
+    def get_label(self, board_id):
+        url = f"https://api.trello.com/1/boards/{board_id}/labels"
+
+        response = requests.request(
+            "GET",
+            url,
+            headers=self.base_headers(),
+            params=self.credentials()
+        )
+        if response.status_code == 200:
+            return json.loads(response.text)
+
+    def post_data(self, data):
+        url = f"https://api.trello.com/1/cards"
+        data.update(self.credentials())
+        response = requests.request(
+            "POST",
+            url,
+            headers=self.base_headers(),
+            params=data
+        )
+        if response.status_code == 200:
+            return json.loads(response.text)
+
+    def list_add(self, list_aAd):
+        url = "https://api.trello.com/1/lists"
+        list_aAd.update(self.credentials())
+        response = requests.request(
+            "POST",
+            url,
+            headers=self.base_headers(),
+            params=list_aAd
+        )
+        if response.status_code == 200:
+            return json.loads(response.text)
+
+    def list_delete(self, _id):
+        print(_id)
+        url = f"https://api.trello.com/1/cards/{_id}"
+        response = requests.request(
+            "DELETE",
+            url,
+            params=self.credentials()
+        )
         if response.status_code == 200:
             return json.loads(response.text)

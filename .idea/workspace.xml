@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="227878c7-6fc3-4fd8-8fea-9a2acd88e0ce" name="Changes" comment="commit">
+      <change beforePath="$PROJECT_DIR$/age_calc/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/curs_exange/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/krill_lotin/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.env.dist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.idea/shazam_bot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/Pipfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/Pipfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/trello_bot/chats.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/data/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/filters/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/channels/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/errors/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/errors/error_handler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/groups/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/users/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/users/echo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/users/help.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/users/start.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/handlers/users/telegraph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/keyboards/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/keyboards/default/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/keyboards/inline/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/loader.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/middlewares/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/middlewares/throttling.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/states/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/db_api/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/misc/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/misc/logging.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/misc/throttling.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/notify_admins.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/photograph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/removeBackground.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shazam_bot/utils/set_bot_commands.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trello_bot/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/trello_bot/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trello_bot/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/trello_bot/keyboards.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trello_bot/trello.py" beforeDir="false" afterPath="$PROJECT_DIR$/trello_bot/trello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trello_bot/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/trello_bot/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/youtube_insta_tiktok_down/.idea/workspace.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="trello" />
+      </map>
+    </option>
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LphekrDv1x7X0f8zNBSv8UrRTJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Roziali/python/telegramm_bot/trello_bot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Roziali\python\telegramm_bot\translate" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="227878c7-6fc3-4fd8-8fea-9a2acd88e0ce" name="Changes" comment="" />
+      <created>1676574028887</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676574028887</updated>
+      <workItem from="1676574029934" duration="929000" />
+      <workItem from="1676630778301" duration="531000" />
+      <workItem from="1676631332537" duration="947000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

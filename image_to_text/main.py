@@ -8,7 +8,8 @@ bot = telebot.TeleBot('6182467188:AAFQPq1L1PCZ57NPb-q9OOcDlrToG7-xmrU')
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Hello! Please send me a photo.')
+    bot.reply_to(message, 'Hello! I am convert image to text\n'
+                          'send photo')
 
 
 @bot.message_handler(content_types=['photo'])
@@ -25,7 +26,10 @@ def photo(message):
     if os.path.exists(f'{file_id}.jpg'):
         os.remove(f'{file_id}.jpg')
 
-
+@bot.message_handler(content_types=['text'])
+def echo(message):
+    bot.send_message(message.chat.id, 'Hello! I am convert image to text\n'
+                          'send photo\nadmin: @developer2006')
 
 if __name__ == "__main__":
     print("started")

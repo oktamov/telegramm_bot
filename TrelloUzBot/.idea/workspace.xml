@@ -4,28 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ebef37e5-2eee-4cd4-b14e-df68703bbeb3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dars_to_do_registratsiya/utils/db_api/write_database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../example/.idea/example.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../to_audio/.idea/to_audio.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../to_audio/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chats.csv" beforeDir="false" afterPath="$PROJECT_DIR$/chats.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+    <list default="true" id="ebef37e5-2eee-4cd4-b14e-df68703bbeb3" name="Changes" comment="commit">
       <change beforePath="$PROJECT_DIR$/../image_to_text/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../image_to_text/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../image_to_text/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../image_to_text/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trello_bot/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../trello_bot/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,12 +144,16 @@
       <workItem from="1678357151298" duration="4255000" />
       <workItem from="1678361582842" duration="7831000" />
       <workItem from="1678422421681" duration="6369000" />
-      <workItem from="1678438768705" duration="1137000" />
+      <workItem from="1678438768705" duration="1473000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TrelloUzBot$bot.coverage" NAME="bot Coverage Results" MODIFIED="1678439829501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

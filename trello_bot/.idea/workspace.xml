@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74d3697f-8d7f-4508-b74b-9a948259ccde" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../image_to_text/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TrelloUzBot/.idea/TrelloUzBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../TrelloUzBot/.idea/TrelloUzBot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TrelloUzBot/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TrelloUzBot/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../to_audio/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../image_to_text/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../image_to_text/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../image_to_text/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../image_to_text/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +36,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
     <configuration name="bot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="trello_bot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -50,6 +51,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="trello_bot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -75,11 +98,23 @@
       <workItem from="1676632003508" duration="2193000" />
       <workItem from="1676705962647" duration="1063000" />
       <workItem from="1676714509603" duration="15000" />
+      <workItem from="1677923883489" duration="11000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/trello_bot$bot.coverage" NAME="bot Coverage Results" MODIFIED="1676634009389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

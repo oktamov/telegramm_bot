@@ -1,3 +1,5 @@
+import db
+from db import show_board_name_id
 from trello import TrelloManager
 from telebot.types import (
     ReplyKeyboardMarkup,
@@ -9,7 +11,7 @@ from telebot.types import (
 
 def get_boards_btn(trello_username):
     boards_btn = ReplyKeyboardMarkup(resize_keyboard=True)
-    boards = TrelloManager(trello_username).get_boards()
+    boards = show_board_name_id(trello_username)
     if len(boards) % 2 == 0:
         last_board = None
     else:
@@ -26,7 +28,8 @@ def get_boards_btn(trello_username):
 
 def get_inline_boards_btn(trello_username, action):
     inline_boards_btn = InlineKeyboardMarkup()
-    boards = TrelloManager(trello_username).get_boards()
+    boards = show_board_name_id(trello_username)
+    print(boards)
     if len(boards) % 2 == 0:
         last_board = None
     else:
@@ -46,7 +49,6 @@ def get_inline_boards_btn(trello_username, action):
         )
     return inline_boards_btn
 
-
 def get_lists_btn(trello, board_id):
     lists_btn = ReplyKeyboardMarkup()
     lists = trello.get_lists_on_a_board(board_id)
@@ -64,9 +66,9 @@ def get_lists_btn(trello, board_id):
     return lists_btn
 
 
-def get_inline_lists_btn(trello, board_id, action):
+def get_inline_lists_btn(board_id, action):
     lists_inline_btn = InlineKeyboardMarkup()
-    lists = trello.get_lists_on_a_board(board_id)
+    lists = db.show_lists(board_id)
     if len(lists) % 2 == 0:
         last_list = None
     else:
@@ -92,7 +94,7 @@ def get_inline_lists_btn(trello, board_id, action):
 
 
 def get_members_btn(trello_username, board_id, action):
-    members = TrelloManager(trello_username).get_board_members(board_id)
+    members = db.members_label(trello_username, board_id)
     # print(members)
     members_btn = InlineKeyboardMarkup()
     if len(members) % 2 == 0:

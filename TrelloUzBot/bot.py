@@ -1,3 +1,5 @@
+import db
+from db import write_board
 from keyboards import get_inline_boards_btn, get_inline_lists_btn, get_members_btn, get_label_btn
 import messages
 import telebot
@@ -51,6 +53,7 @@ def get_boards(message):
     else:
         trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
         if trello_username:
+            write_board(trello_username)
             bot.send_message(
                 message.chat.id, messages.SELECT_BOARD,
                 reply_markup=get_inline_boards_btn(trello_username, "show_tasks")
@@ -65,8 +68,9 @@ def get_board_lists(call):
     trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
     trello = TrelloManager(trello_username)
     board_id = call.data.split("_")[2]
+    db.write_lists(trello_username, board_id)
     bot.send_message(
-        message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(trello, board_id, "show_list_tasks")
+        message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(board_id, "show_list_tasks")
     )
 
 
@@ -76,8 +80,7 @@ def get_member_cards(call):
     list_id = call.data.split("_")[3]
     trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
     trello = TrelloManager(trello_username)
-    card_data = trello.get_cards_on_a_list(list_id)
-    msg = get_member_tasks_message(card_data, trello.get_member_id())
+    msg = db.write_cards(trello_username, list_id)
     print(msg)
     if msg:
         bot.send_message(message.chat.id, msg)
@@ -109,7 +112,7 @@ def get_new_task_name(call):
     trello = TrelloManager(trello_username)
     board_id = call.data.split("_")[2]
     bot.send_message(
-        message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(trello, board_id, "new_doska")
+        message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(board_id, "new_doska")
     )
     bot.set_state(call.from_user.id, CreateNewTask.list, message.chat.id)
     with bot.retrieve_data(call.from_user.id, message.chat.id) as data:

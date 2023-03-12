@@ -42,3 +42,10 @@ def get_member_tasks_message(card_data, member_id):
             msg += f"{data.get('idShort')} - {data.get('name')}\n"
 
     return msg
+
+
+def get_user_tasks_message(cards):
+    msg = ""
+    for index, card in enumerate(cards):
+        msg += f"{index + 1}. <a href=\"{card.get('url')}\">{card.get('card_name')}</a>\n"
+    return msg

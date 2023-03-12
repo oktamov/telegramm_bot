@@ -1,98 +1,160 @@
-# / home / asus / PycharmProjects / TrelloUzBot / env / bin / python / home / asus / PycharmProjects / TrelloUzBot / bot / bot.py
-# Started...
-# [{'id': '63ee9840e828354f23aaf303',
-#   'badges': {'attachmentsByType': {'trello': {'board': 0, 'card': 0}}, 'location': False, 'votes': 0,
-#              'viewingMemberVoted': False, 'subscribed': True, 'fogbugz': '', 'checkItems': 0, 'checkItemsChecked': 0,
-#              'checkItemsEarliestDue': None, 'comments': 1, 'attachments': 0, 'description': True, 'due': None,
-#              'dueComplete': False, 'start': None}, 'checkItemStates': None, 'closed': False, 'dueComplete': False,
-#   'dateLastActivity': '2023-02-16T21:27:36.934Z', 'desc': 'edededed', 'descData': {'emoji': {}}, 'due': None,
-#   'dueReminder': None, 'email': None, 'idBoard': '63ee35bdf19806bbf560df69', 'idChecklists': [],
-#   'idList': '63ee35bdf19806bbf560df71', 'idMembers': ['63ea227728ee0b875a66f2f5'], 'idMembersVoted': [], 'idShort': 3,
-#   'idAttachmentCover': None,
-#   'labels': [{'id': '63ee35bd2f36f2348ad758f8', 'idBoard': '63ee35bdf19806bbf560df69', 'name': '', 'color': 'blue'}],
-#   'idLabels': ['63ee35bd2f36f2348ad758f8'], 'manualCoverAttachment': False, 'name': 'bosingla', 'pos': 65535,
-#   'shortLink': 'lN8pSbCo', 'shortUrl': 'https://trello.com/c/lN8pSbCo', 'start': None, 'subscribed': True,
-#   'url': 'https://trello.com/c/lN8pSbCo/3-bosingla',
-#   'cover': {'idAttachment': None, 'color': None, 'idUploadedBackground': None, 'size': 'normal', 'brightness': 'dark',
-#             'idPlugin': None}, 'isTemplate': False, 'cardRole': None}, {'id': '63ee98403325d9e808f1f450', 'badges': {
-#     'attachmentsByType': {'trello': {'board': 0, 'card': 0}}, 'location': False, 'votes': 0,
-#     'viewingMemberVoted': False, 'subscribed': False, 'fogbugz': '', 'checkItems': 0, 'checkItemsChecked': 0,
-#     'checkItemsEarliestDue': None, 'comments': 0, 'attachments': 0, 'description': True, 'due': None,
-#     'dueComplete': False, 'start': None}, 'checkItemStates': None, 'closed': False, 'dueComplete': False,
-#                                                                         'dateLastActivity': '2023-02-16T21:27:28.540Z',
-#                                                                         'desc': 'olga', 'descData': {'emoji': {}},
-#                                                                         'due': None, 'dueReminder': None, 'email': None,
-#                                                                         'idBoard': '63ee35bdf19806bbf560df69',
-#                                                                         'idChecklists': [],
-#                                                                         'idList': '63ee35bdf19806bbf560df71',
-#                                                                         'idMembers': [], 'idMembersVoted': [],
-#                                                                         'idShort': 4, 'idAttachmentCover': None,
-#                                                                         'labels': [{'id': '63ee35bd2f36f2348ad758f8',
-#                                                                                     'idBoard': '63ee35bdf19806bbf560df69',
-#                                                                                     'name': '', 'color': 'blue'}],
-#                                                                         'idLabels': ['63ee35bd2f36f2348ad758f8'],
-#                                                                         'manualCoverAttachment': False,
-#                                                                         'name': 'tayyor', 'pos': 131071,
-#                                                                         'shortLink': 'kmWZHNWX',
-#                                                                         'shortUrl': 'https://trello.com/c/kmWZHNWX',
-#                                                                         'start': None, 'subscribed': False,
-#                                                                         'url': 'https://trello.com/c/kmWZHNWX/4-tayyor',
-#                                                                         'cover': {'idAttachment': None, 'color': None,
-#                                                                                   'idUploadedBackground': None,
-#                                                                                   'size': 'normal',
-#                                                                                   'brightness': 'dark',
-#                                                                                   'idPlugin': None},
-#                                                                         'isTemplate': False, 'cardRole': None},
-#  {'id': '63ee98413ba5ab0bf4ac45cf',
-#   'badges': {'attachmentsByType': {'trello': {'board': 0, 'card': 0}}, 'location': False, 'votes': 0,
-#              'viewingMemberVoted': False, 'subscribed': False, 'fogbugz': '', 'checkItems': 0, 'checkItemsChecked': 0,
-#              'checkItemsEarliestDue': None, 'comments': 0, 'attachments': 0, 'description': True, 'due': None,
-#              'dueComplete': False, 'start': None}, 'checkItemStates': None, 'closed': False, 'dueComplete': False,
-#   'dateLastActivity': '2023-02-16T21:27:49.086Z', 'desc': 'dededwdwed', 'descData': {'emoji': {}}, 'due': None,
-#   'dueReminder': None, 'email': None, 'idBoard': '63ee35bdf19806bbf560df69', 'idChecklists': [],
-#   'idList': '63ee35bdf19806bbf560df71', 'idMembers': [], 'idMembersVoted': [], 'idShort': 5, 'idAttachmentCover': None,
-#   'labels': [{'id': '63ee35bd2f36f2348ad758e5', 'idBoard': '63ee35bdf19806bbf560df69', 'name': '', 'color': 'green'}],
-#   'idLabels': ['63ee35bd2f36f2348ad758e5'], 'manualCoverAttachment': False, 'name': 'nimadur', 'pos': 196607,
-#   'shortLink': 'nbpJq2p6', 'shortUrl': 'https://trello.com/c/nbpJq2p6', 'start': None, 'subscribed': False,
-#   'url': 'https://trello.com/c/nbpJq2p6/5-nimadur',
-#   'cover': {'idAttachment': None, 'color': None, 'idUploadedBackground': None, 'size': 'normal', 'brightness': 'dark',
-#             'idPlugin': None}, 'isTemplate': False, 'cardRole': None}, {'id': '63ee984226ce0c98b93aa071', 'badges': {
-#     'attachmentsByType': {'trello': {'board': 0, 'card': 0}}, 'location': False, 'votes': 0,
-#     'viewingMemberVoted': False, 'subscribed': False, 'fogbugz': '', 'checkItems': 0, 'checkItemsChecked': 0,
-#     'checkItemsEarliestDue': None, 'comments': 0, 'attachments': 0, 'description': False, 'due': None,
-#     'dueComplete': False, 'start': None}, 'checkItemStates': None, 'closed': False, 'dueComplete': False,
-#                                                                         'dateLastActivity': '2023-02-16T20:55:30.313Z',
-#                                                                         'desc': '', 'descData': {'emoji': {}},
-#                                                                         'due': None, 'dueReminder': None, 'email': None,
-#                                                                         'idBoard': '63ee35bdf19806bbf560df69',
-#                                                                         'idChecklists': [],
-#                                                                         'idList': '63ee35bdf19806bbf560df71',
-#                                                                         'idMembers': [], 'idMembersVoted': [],
-#                                                                         'idShort': 6, 'idAttachmentCover': None,
-#                                                                         'labels': [], 'idLabels': [],
-#                                                                         'manualCoverAttachment': False,
-#                                                                         'name': 'f,d;f,d;4', 'pos': 262143,
-#                                                                         'shortLink': 'A1cEl6fr',
-#                                                                         'shortUrl': 'https://trello.com/c/A1cEl6fr',
-#                                                                         'start': None, 'subscribed': False,
-#                                                                         'url': 'https://trello.com/c/A1cEl6fr/6-fdfd4',
-#                                                                         'cover': {'idAttachment': None, 'color': None,
-#                                                                                   'idUploadedBackground': None,
-#                                                                                   'size': 'normal',
-#                                                                                   'brightness': 'dark',
-#                                                                                   'idPlugin': None},
-#                                                                         'isTemplate': False, 'cardRole': None},
-#  {'id': '63ee9842342d8d0ebc18bc63',
-#   'badges': {'attachmentsByType': {'trello': {'board': 0, 'card': 0}}, 'location': False, 'votes': 0,
-#              'viewingMemberVoted': False, 'subscribed': False, 'fogbugz': '', 'checkItems': 0, 'checkItemsChecked': 0,
-#              'checkItemsEarliestDue': None, 'comments': 0, 'attachments': 0, 'description': False, 'due': None,
-#              'dueComplete': False, 'start': None}, 'checkItemStates': None, 'closed': False, 'dueComplete': False,
-#   'dateLastActivity': '2023-02-16T20:55:30.831Z', 'desc': '', 'descData': {'emoji': {}}, 'due': None,
-#   'dueReminder': None, 'email': None, 'idBoard': '63ee35bdf19806bbf560df69', 'idChecklists': [],
-#   'idList': '63ee35bdf19806bbf560df71', 'idMembers': [], 'idMembersVoted': [], 'idShort': 7, 'idAttachmentCover': None,
-#   'labels': [], 'idLabels': [], 'manualCoverAttachment': False, 'name': 'af,d;f,a', 'pos': 327679,
-#   'shortLink': 'wOujMnsK', 'shortUrl': 'https://trello.com/c/wOujMnsK', 'start': None, 'subscribed': False,
-#   'url': 'https://trello.com/c/wOujMnsK/7-afdfa',
-#   'cover': {'idAttachment': None, 'color': None, 'idUploadedBackground': None, 'size': 'normal', 'brightness': 'dark',
-#             'idPlugin': None}, 'isTemplate': False, 'cardRole': None}]
-# #
+import psycopg2
+from psycopg2.extras import RealDictCursor
+from environs import Env
+
+from trello import TrelloManager
+
+env = Env()
+env.read_env()
+
+
+
+def connect():
+    return psycopg2.connect(
+        dbname=env("DB_NAME"),
+        user=env("DB_USER"),
+        password=env("DB_PASSWORD"),
+        host=env("DB_HOST"),
+        port=env("DB_PORT")
+    )
+# ALL_USERS = "select * from users"
+# GET_USER_BY_CHAT_ID = "select * from users where chat_id = %s"
+# REGISTER_USER = """
+#     insert into
+#     users(chat_id, first_name, last_name, username)
+#     VALUES (%s, %s, %s, %s)
+# """
+# UPDATE_USER_TRELLO_BY_CHAT_ID = """
+#     update users
+#     set trello_username = %s, trello_id = %s
+#     where chat_id = %s"""
+
+def show_board_name_id(username):
+    doska = []
+    cur = connection.cursor()
+    cur.execute(f"select board_name, trello_id from boards where trello_username='{username}'")
+    name = cur.fetchall()
+    for i in name:
+        doska.append({"name": i[0],
+                      "id": i[1]})
+    return doska
+
+#
+# def write_board(username):
+#     boards = TrelloManager(username).get_boards()
+#     cur = connection.cursor()
+#
+#     for board_index in range(len(boards)):
+#         print(boards[board_index].get("id"))
+#         # if boards[board_index].get("id") not in show_board_name_id(username)[board_index].values():
+#         #     print("Sassas")
+#         # cur.execute(f"delete from boards where trello_id <> '{(boards[board_index].get('id'))}'")
+#         sql = "insert into boards(board_name, trello_id, trello_username) values (%s,%s,%s) on conflict (trello_id)do update set board_name = EXCLUDED.board_name"
+#         values = (boards[board_index].get("name"), boards[board_index].get("id"), username)
+#         cur.execute(sql, values)
+#         connection.commit()
+#     cur.close()
+#
+
+def show_lists(board_id):
+    doska = []
+    cur = connection.cursor()
+    cur.execute(f"select list_name, trello_id from lists where board_id='{board_id}'")
+    name = cur.fetchall()
+    for i in name:
+        doska.append({"name": i[0],
+                      "id": i[1]})
+    print(doska)
+    return doska
+
+#
+# def write_lists(trello_username, board_id):
+#     lists = TrelloManager(trello_username).get_lists_on_a_board(board_id)
+#     cur = connection.cursor()
+#     cur1 = connection.cursor()
+#     for list_index in range(len(lists)):
+#         sql = "insert into lists(list_name, trello_id, board_id) values (%s,%s, %s) on conflict (trello_id) do update set list_name = EXCLUDED.list_name"
+#         values = (lists[list_index].get("name"), lists[list_index].get("id"), board_id)
+#         cur.execute(sql, values)
+#         connection.commit()
+#     cur1.close()
+#     cur.close()
+
+
+def write_cards(username, list_id):
+    cur = connection.cursor(cursor_factory=RealDictCursor)
+    sql = 'CREATE TABLE if not exists cards(id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,  ' \
+          'cards_name varchar(80),cards_id varchar(100) unique not null ,list_id varchar(100)NOT NULL,' \
+          'des text,url text, cards_coid integer references lists(id))'
+    cur.execute(sql)
+    connection.commit()
+    cur.close()
+    card_data = TrelloManager(username).get_cards_on_a_list(list_id)
+    member_id = TrelloManager(username).get_member_id()
+    msg = ""
+    curr = connection.cursor()
+    for i in card_data:
+        if member_id in i.get("idMembers"):
+            sql = 'insert into cards(cards_name,cards_id,des,url,list_id,cards_coid) values (%s,%s,%s,%s,%s,%s) ' \
+                  'on conflict (cards_id) do update set cards_name = EXCLUDED.cards_name'
+            curr.execute(f"select id from lists  where trello"
+                         f"_id='{list_id}'")
+            name = curr.fetchall()
+            curr.execute(sql,
+                         (i.get('name'), i.get('id'), i.get('desc'), i.get('url'), list_id, name[0][0]))
+            connection.commit()
+            with connection.cursor() as cars:
+                cars.execute(f"select cards_name from cards where cards_id='{i['id']}'and list_id='{list_id}'")
+                name = cars.fetchall()
+                for j in name:
+                    for g in j:
+                        msg += f"{i.get('idShort')} - {g}\n"
+    curr.close()
+    return msg
+
+
+def members_label(username, board_id):
+    members = TrelloManager(username).get_board_members(board_id)
+    data = []
+    cur = connection.cursor(cursor_factory=RealDictCursor)
+    sql = 'CREATE TABLE if not exists members(id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,' \
+          'full_name varchar(100)not null,trello_username varchar(100) unique not null,' \
+          'trello_id varchar(80)unique not null )  '
+    cur.execute(sql)
+    connection.commit()
+    cur.close()
+    for i in members:
+        curr = connection.cursor()
+        sql = 'insert into members(full_name,trello_username,trello_id)values (%s,%s,%s)' \
+              'on conflict (trello_id) do update set full_name = excluded.full_name'
+        curr.execute(sql, (i.get('fullName'), i.get('username'), i.get('id')))
+        connection.commit()
+        with connection.cursor() as m:
+            m.execute(f"select full_name,trello_id from members where trello_username ='{i['username']}'")
+            s = m.fetchall()
+            for row in s:
+                data.append({
+                    'fullName': row[0],
+                    'id': row[1]
+                })
+    cur = connection.cursor(cursor_factory=RealDictCursor)
+    sql = 'CREATE TABLE if not exists members_one(id int,cards_id int unique ,memberes_id int unique ,' \
+          'foreign key(cards_id)references cards(id),foreign key (memberes_id)references members(id))'
+    cur.execute(sql)
+    connection.commit()
+    cur.close()
+    con = connection.cursor()
+    sql = 'insert into members_one(cards_id)values (%s) on conflict (cards_id)do nothing '
+    con.execute('select id from cards')
+    name = con.fetchall()
+    for j in name:
+        con.execute(sql, (j))
+        connection.commit()
+    sql = 'insert into members_one(memberes_id)values (%s) on conflict (memberes_id)do update set memberes_id=excluded.memberes_id'
+    con.execute('select id from members')
+    name = con.fetchall()
+    for i in name:
+        con.execute(sql, (i))
+        connection.commit()
+    con.close()
+    return data

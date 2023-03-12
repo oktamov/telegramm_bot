@@ -1,5 +1,9 @@
+from psycopg2.extras import RealDictCursor
+
 import db
-from db import show_board_name_id
+from data import show_board_name_id
+from db import connection
+from db.queries import GET_BOARD_BY_TRELLO_ID, GET_USER_BOARDS, GET_LIST_BY_TRELLO_ID, GET_LIST_BOARD_ID
 from trello import TrelloManager
 from telebot.types import (
     ReplyKeyboardMarkup,
@@ -9,26 +13,14 @@ from telebot.types import (
 )
 
 
-def get_boards_btn(trello_username):
-    boards_btn = ReplyKeyboardMarkup(resize_keyboard=True)
-    boards = show_board_name_id(trello_username)
-    if len(boards) % 2 == 0:
-        last_board = None
-    else:
-        last_board = boards.pop()
-    for board_index in range(len(boards) - 1):
-        boards_btn.add(
-            KeyboardButton(boards[board_index].get("name")),
-            KeyboardButton(boards[board_index + 1].get("name"))
-        )
-    if last_board:
-        boards_btn.add(KeyboardButton(last_board.get("name")))
-    return boards_btn
 
 
-def get_inline_boards_btn(trello_username, action):
+
+def get_inline_boards_btn(user_id, action):
     inline_boards_btn = InlineKeyboardMarkup()
-    boards = show_board_name_id(trello_username)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(GET_USER_BOARDS, (user_id,))
+        boards = cur.fetchall()
     print(boards)
     if len(boards) % 2 == 0:
         last_board = None
@@ -37,15 +29,15 @@ def get_inline_boards_btn(trello_username, action):
     for board_index in range(0, len(boards) - 1, 2):
         inline_boards_btn.add(
             InlineKeyboardButton(
-                boards[board_index].get("name"), callback_data=f'{action}_{boards[board_index].get("id")}'
+                boards[board_index].get("name"), callback_data=f'{action}_{boards[board_index].get("board_id")}'
             ),
             InlineKeyboardButton(
-                boards[board_index + 1].get("name"), callback_data=f'{action}_{boards[board_index + 1].get("id")}'
+                boards[board_index + 1].get("name"), callback_data=f'{action}_{boards[board_index + 1].get("board_id")}'
             )
         )
     if last_board:
         inline_boards_btn.add(
-            InlineKeyboardButton(last_board.get("name"), callback_data=f'{action}_{last_board.get("id")}')
+            InlineKeyboardButton(last_board.get("name"), callback_data=f'{action}_{last_board.get("board_id")}')
         )
     return inline_boards_btn
 
@@ -68,7 +60,9 @@ def get_lists_btn(trello, board_id):
 
 def get_inline_lists_btn(board_id, action):
     lists_inline_btn = InlineKeyboardMarkup()
-    lists = db.show_lists(board_id)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(GET_LIST_BOARD_ID, (board_id,))
+        lists = cur.fetchall()
     if len(lists) % 2 == 0:
         last_list = None
     else:
@@ -87,7 +81,7 @@ def get_inline_lists_btn(board_id, action):
     if last_list:
         lists_inline_btn.add(
             InlineKeyboardButton(
-                last_list.get("name"), callback_data=f'{action}_{last_list.get("id")}'
+                last_list.get("name"), callback_data=f'{action}_{last_list.get("board_id")}'
             )
         )
     return lists_inline_btn

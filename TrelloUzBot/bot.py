@@ -1,5 +1,7 @@
-import db
-from db import write_board
+from psycopg2.extras import RealDictCursor
+
+from db import queries, conf, connection
+
 from keyboards import get_inline_boards_btn, get_inline_lists_btn, get_members_btn, get_label_btn
 import messages
 import telebot
@@ -7,9 +9,10 @@ from environs import Env
 from telebot import custom_filters
 
 from states import CreateNewTask, AddList
+from sync import sync_boards
 from trello import TrelloManager
 from utils import write_chat_to_csv, check_chat_id_from_csv, get_trello_username_by_chat_id, \
-    get_member_tasks_message
+    get_member_tasks_message, get_user_tasks_message
 
 env = Env()
 env.read_env()
@@ -33,93 +36,131 @@ def welcome(message):
 
 @bot.message_handler(commands=["register"])
 def register_handler(message):
-    if not check_chat_id_from_csv("chats.csv", message.chat.id):
-        bot.send_message(message.chat.id, messages.SEND_TRELLO_USERNAME)
-        bot.register_next_step_handler(message, get_trello_username)
-    else:
-        bot.send_message(message.chat.id, messages.ALREADY_REGISTERED)
+    chat_id = message.chat.id
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (chat_id,))
+        user = cur.fetchone()
+        if not user:
+            chat = message.from_user
+            cur.execute(queries.REGISTER_USER, (chat_id, chat.first_name, chat.last_name, chat.username))
+            connection.commit()
+            bot.send_message(message.chat.id, messages.SEND_TRELLO_USERNAME)
+            bot.register_next_step_handler(message, get_trello_username)
+        else:
+            bot.send_message(message.chat.id, messages.ALREADY_REGISTERED)
 
 
 # Trello username
 def get_trello_username(message):
-    write_chat_to_csv("chats.csv", message)
+    with connection.cursor() as cur:
+        trello_username = message.text
+        trello_id = TrelloManager(trello_username).get_member_id()
+        cur.execute(
+            queries.UPDATE_USER_TRELLO_BY_CHAT_ID, (trello_username, trello_id, message.chat.id)
+        )
+        connection.commit()
     bot.send_message(message.chat.id, messages.ADD_SUCCESSFULLY)
 
 
+@bot.message_handler(commands=["sync"])
+def sync_trello_handler(message):
+    bot.send_message(message.chat.id, messages.SYNC_STARTED)
+    # Sync Trello
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (message.chat.id,))
+        user = cur.fetchone()
+        trello_username = user.get("trello_username")
+        sync_boards(trello_username)
+    bot.send_message(message.chat.id, messages.SYNC_ENDED)
+
+
 @bot.message_handler(commands=["boards"])
-def get_boards(message):
-    if not check_chat_id_from_csv("chats.csv", message.chat.id):
-        bot.send_message(message.chat.id, messages.TRELLO_USERNAME_NOT_FOUND)
+def sending_tasks_handler(message):
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (message.chat.id,))
+        user = cur.fetchone()
+        trello_username = user.get("trello_username")
+    if trello_username:
+        bot.send_message(
+            message.chat.id, messages.SELECT_BOARD,
+            reply_markup=get_inline_boards_btn(user.get("id"), "show_board")
+        )
     else:
-        trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
-        if trello_username:
-            write_board(trello_username)
-            bot.send_message(
-                message.chat.id, messages.SELECT_BOARD,
-                reply_markup=get_inline_boards_btn(trello_username, "show_tasks")
-            )
-        else:
-            bot.send_message(message.chat.id, messages.TRELLO_USERNAME_NOT_FOUND)
+        bot.send_message(message.chat.id, messages.TRELLO_USERNAME_NOT_FOUND)
 
 
-@bot.callback_query_handler(lambda c: c.data.startswith("show_tasks"))
+@bot.callback_query_handler(lambda c: c.data.startswith("show_board"))
 def get_board_lists(call):
     message = call.message
-    trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
-    trello = TrelloManager(trello_username)
     board_id = call.data.split("_")[2]
-    db.write_lists(trello_username, board_id)
-    bot.send_message(
-        message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(board_id, "show_list_tasks")
-    )
-
-
-@bot.callback_query_handler(lambda c: c.data.startswith("show_list_tasks_"))
-def get_member_cards(call):
-    message = call.message
-    list_id = call.data.split("_")[3]
-    trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
-    trello = TrelloManager(trello_username)
-    msg = db.write_cards(trello_username, list_id)
-    print(msg)
-    if msg:
-        bot.send_message(message.chat.id, msg)
+    print(board_id)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (message.chat.id,))
+        user = cur.fetchone()
+        trello_username = user.get("trello_username")
+    if trello_username:
+        bot.send_message(
+            message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(board_id, "tasks_card")
+        )
     else:
-        bot.send_message(message.chat.id, messages.NO_TASKS)
+        bot.send_message(message.chat.id, "No'to'g'ri kiritdingiz:")
+
+@bot.callback_query_handler(lambda c: c.data.startswith("tasks_card"))
+def get_user_tasks_handler(call):
+    message = call.message
+    chat_id = message.chat.id
+    board_id = call.data.split("_")[2]
+
+    print(board_id)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (chat_id,))
+        user = cur.fetchone()
+        if user:
+            cur.execute(queries.GET_USER_CARDS_BY_BOARD_ID, (board_id, user.get("id")))
+            cards = cur.fetchall()
+            if cards:
+                bot.send_message(chat_id, get_user_tasks_message(cards))
+            else:
+                bot.send_message(chat_id, messages.NO_TASKS)
+        else:
+            bot.send_message(chat_id, messages.USER_NOT_FOUND)
 
 
 @bot.message_handler(commands=["new"])
 def create_new_task(message):
-    if not check_chat_id_from_csv("chats.csv", message.chat.id):
-        bot.send_message(message.chat.id, messages.TRELLO_USERNAME_NOT_FOUND)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (message.chat.id,))
+        user = cur.fetchone()
+        trello_username = user.get("trello_username")
+    if trello_username:
+        bot.send_message(
+            message.chat.id, messages.SELECT_BOARD,
+            reply_markup=get_inline_boards_btn(user.get("id"), "new_tasks")
+        )
+        bot.set_state(message.from_user.id, CreateNewTask.board, message.chat.id)
     else:
-        trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
-        if trello_username:
-            bot.send_message(
-                message.chat.id, messages.CREATE_TASK,
-                reply_markup=get_inline_boards_btn(trello_username, "new_tasks")
-            )
-            bot.set_state(message.from_user.id, CreateNewTask.board, message.chat.id)
-
-        else:
-            bot.send_message(message.chat.id, messages.TRELLO_USERNAME_NOT_FOUND)
-
+        bot.send_message(message.chat.id, messages.TRELLO_USERNAME_NOT_FOUND)
 
 @bot.callback_query_handler(lambda call: call.data.startswith("new_tasks_"), state=CreateNewTask.board)
 def get_new_task_name(call):
     message = call.message
-    trello_username = get_trello_username_by_chat_id("chats.csv", message.chat.id)
-    trello = TrelloManager(trello_username)
     board_id = call.data.split("_")[2]
-    bot.send_message(
-        message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(board_id, "new_doska")
-    )
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(queries.GET_USER_BY_CHAT_ID, (message.chat.id,))
+        user = cur.fetchone()
+        trello_username = user.get("trello_username")
+    if trello_username:
+        bot.send_message(
+            message.chat.id, "Listni tanlang:", reply_markup=get_inline_lists_btn(board_id, "new_card")
+        )
+    else:
+        bot.send_message(message.chat.id, "No'to'g'ri kiritdingiz:")
     bot.set_state(call.from_user.id, CreateNewTask.list, message.chat.id)
     with bot.retrieve_data(call.from_user.id, message.chat.id) as data:
         data["task_board_id"] = board_id
 
 
-@bot.callback_query_handler(func=lambda call: call.data.startswith("new_doska"))
+@bot.callback_query_handler(func=lambda call: call.data.startswith("new_card"))
 def get_list_id_for_new_task(call):
     message = call.message
     list_id = call.data.split("_")[2]
@@ -254,7 +295,8 @@ my_commands = [
     telebot.types.BotCommand("/column", "List Yaratish"),
     telebot.types.BotCommand("/delete", "O'chirish"),
     telebot.types.BotCommand("/cancel", "Bekor qilish"),
-    telebot.types.BotCommand("/help", "Yordam")
+    telebot.types.BotCommand("/help", "Yordam"),
+    telebot.types.BotCommand("/sync", "sinxronizatsiya qilish")
 
 ]
 

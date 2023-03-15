@@ -20,6 +20,7 @@ def sync_boards(trello_username):
                 db_board.get("id")
             )
             sync_lists(trello, trello_board_id, db_board.get("id"))
+            sync_member_list(trello, trello_board_id, db_board.get('id'))
 
 
 # Board users
@@ -90,3 +91,14 @@ def sync_card_members(trello_card_id, user_ids):
             for add_id in must_add_ids:
                 cur.execute(queries.INSERT_CARD_MEMBER, (card_id, add_id))
                 connection.commit()
+
+
+def sync_member_list(trello, board_trello_id, board_id):
+    members = trello.get_board_members(board_trello_id)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        for i in members:
+            cur.execute(queries.UPSERT_MEMBERS,
+                        (i.get('fullName'), i.get('username'), i.get('id'), board_id))
+            connection.commit()
+            # cur.execute(queries.UPSERT_BOARD_MEMBERS_ID, (board_id,))
+

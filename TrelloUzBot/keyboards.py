@@ -13,9 +13,6 @@ from telebot.types import (
 )
 
 
-
-
-
 def get_inline_boards_btn(user_id, action):
     inline_boards_btn = InlineKeyboardMarkup()
     with connection.cursor(cursor_factory=RealDictCursor) as cur:
@@ -40,6 +37,7 @@ def get_inline_boards_btn(user_id, action):
             InlineKeyboardButton(last_board.get("name"), callback_data=f'{action}_{last_board.get("board_id")}')
         )
     return inline_boards_btn
+
 
 def get_lists_btn(trello, board_id):
     lists_btn = ReplyKeyboardMarkup()
@@ -88,7 +86,9 @@ def get_inline_lists_btn(board_id, action):
 
 
 def get_members_btn(trello_username, board_id, action):
-    members = db.members_label(trello_username, board_id)
+    with connection.cursor(cursor_factory=RealDictCursor) as cur:
+        cur.execute(db.queries.GET_MEMBERS_BOARD_ID)
+        members = cur.fetchall()
     # print(members)
     members_btn = InlineKeyboardMarkup()
     if len(members) % 2 == 0:
@@ -98,18 +98,18 @@ def get_members_btn(trello_username, board_id, action):
     for i in range(0, len(members) - 1, 2):
         members_btn.add(
             InlineKeyboardButton(
-                members[i].get("fullName"),
-                callback_data=f'{action}_{members[i].get("id")}'
+                members[i].get("full_name"),
+                callback_data=f'{action}_{members[i].get("trello_id")}'
             ),
             InlineKeyboardButton(
-                members[i + 1].get("fullName"),
-                callback_data=f'{action}_{members[i + 1].get("id")}'
+                members[i + 1].get("full_name"),
+                callback_data=f'{action}_{members[i + 1].get("trello_id")}'
             ),
         )
     if last_member:
         members_btn.add(
             InlineKeyboardButton(
-                last_member.get("name"), callback_data=f'{action}_{last_member.get("id")}'
+                last_member.get("full_name"), callback_data=f'{action}_{last_member.get("trello_id")}'
             )
         )
     return members_btn

@@ -11,8 +11,7 @@ from telebot import custom_filters
 from states import CreateNewTask, AddList
 from sync import sync_boards
 from trello import TrelloManager
-from utils import write_chat_to_csv, check_chat_id_from_csv, get_trello_username_by_chat_id, \
-    get_member_tasks_message, get_user_tasks_message
+from utils import  check_chat_id_from_csv, get_trello_username_by_chat_id, get_user_tasks_message
 
 env = Env()
 env.read_env()

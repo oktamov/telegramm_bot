@@ -81,3 +81,27 @@ GET_USER_CARDS_BY_BOARD_ID = """
     inner join boards b on b.id = l.board_id
     where l.id = %s and cu.user_id = %s
 """
+
+UPSERT_MEMBERS = """
+    insert into members(full_name, trello_username, trello_id, board_id)
+    values (%s, %s, %s, %s)
+    on conflict 
+"""
+
+UPSERT_BOARD_MEMBERS_ID = """
+    insert into boardsmembers as b(board_id, members_id)
+    values (%s, %s)
+    on conflict (board_id, members_id)
+    do nothing
+"""
+
+GET_MEMBERS_USER_ID = """
+    select u.id from users u
+    inner join members m on u.id = m.id
+    where u.trello_id=%s
+"""
+
+GET_MEMBERS_BOARD_ID = """
+select * from members m 
+inner join boards b on b.id=m.board_id
+"""
